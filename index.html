@@ -19,45 +19,45 @@
     </head>
   
     <body>
-        <!-- creating the nav bar starts -->
-        <div class=" container home-header fixed-top bg-white shadow" style="padding: 15px;">
-           <div class="  rowf" style="display: flex ;">
+   
+        <div class=" container-fluid home-header" style="padding: 15px; position:sticky;  background-color:rgb(241, 232, 232); top:0px; z-index:5;">
+           <div class="row  rowf" style="display: flex ;">
             <h3 class="col-4">Ecommerce</h3>
             <div class="col-4">
-                <ul class="nav">
+                <ul class="nav ">
                     <li class="nav-item">
-                      <a class="nav-link active " aria-current="page" href="index.html">Home</a>
+                      <a class="nav-link active text-dark " aria-current="page" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="product.html">Product</a>
+                        <a class="nav-link active text-dark" aria-current="page" href="product.html">Product</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="about.html">About</a>
+                        <a class="nav-link active text-dark" aria-current="page" href="aboutuspage.html">About</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="contact.html">Contact</a>
+                        <a class="nav-link active  text-dark" aria-current="page" href="contactpage.html">Contact</a>
                       </li>
                 </ul>    
             </div>  
-            <div class="col-4">
-                <button type="button" class="btn btn-outline-dark"><a class="nav-link active" aria-current="page" href="login.html"><ion-icon name="log-in-outline"></ion-icon> Login</a></button>
-                <button type="button" class="btn btn-outline-dark"><a class="nav-link active" aria-current="page" href="register.html"> <ion-icon name="person-add-outline"></ion-icon>Register</a></button>
+            <div class="col-4 gap-5">
+                <button type="button" class="btn btn-outline-dark"><a class="nav-link active" aria-current="page" href="loginpage.html"><ion-icon name="log-in-outline"></ion-icon> Login</a></button>
+                <button type="button" class="btn btn-outline-dark"><a class="nav-link active" aria-current="page" href="registerpage.html"> <ion-icon name="person-add-outline"></ion-icon>Register</a></button>
                 <button type="button" class="btn btn-outline-dark"><a class="nav-link active" aria-current="page" href="add-to-cart.html"> <ion-icon name="cart-outline"></ion-icon> Cart(0)</a></button>
             </div>
            </div>
         </div>
-        <!-- creating the nav bar ends -->
+        
                                           
                                            
-        <!-- the banner is starts -->
-        <div class="card text-bg-dark" style="padding-top: 70px;">
+        
+        
                 <img src="./images/main.png.jpg" class="card-img" alt="...">
             <div class="card-img-overlay banner" style="margin-top: 200px;margin-left: 70px;">
-                <h5 class="card-title display-3">New Season Arrivals</h5>
-                <h5 class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a litter bit longer.</h5>
+                <h5 class="card-title display-3 text-white" >New Season Arrivals</h5>
+                <h5 class="card-text text-white">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a litter bit longer.</h5>
             </div>
             
-         </div>
+        
 
          <br> <br>
             <div class="middel">
@@ -65,8 +65,7 @@
             <p>_</p>
             </div>
 
-         <!-- the banner is ends -->
-           <!-- category button starts -->
+         
            <div class="five-btn text-center"><br><br>
             <button type="button" class="btn btn-outline-dark" id="all">All</button>
             <button type="button" class="btn btn-outline-dark" id="men">Men's Clothing</button>
@@ -75,7 +74,8 @@
             <button type="button" class="btn btn-outline-dark" id="ele">Electronics</button>
          </div>
            
-
+         <div class="card" style="padding-top: 70px; display:grid; grid-template-columns:repeat(3,1fr); gap:10px;"> 
+        </div>
         
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -91,7 +91,7 @@
 
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-        <!-- <script src="script.js"></script> -->
-        <script src="sample.js"></script>
+        
+        <script src="index.js"></script>
     </body>
 </html>
