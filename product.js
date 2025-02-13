@@ -1,15 +1,21 @@
  let allproducts = document.querySelector(".allproducts")
 
- let row = document.querySelector(".details"); 
+ let row = document.querySelector(".allDetailsProductPage"); 
 console.log(row);
 
 let dataPro = [];
-
+let id =localStorage.getItem("id")
 async function fetchData() {
   const response = await fetch("https://fakestoreapi.com/products");
   const data = await response.json();
   console.log(data);
-  createcards(data);
+ 
+  if(id=="details"){
+    createcards(data);
+  }
+  else{
+    detailspage(data)
+  }
   data.map((ele) => {
     dataPro.push(ele);
   });
@@ -30,7 +36,7 @@ function createcards(source) {
   </p><hr>
   <p style="text-align: center;">$${currObj.price}</p><hr>
 
-  <button style="background-color: black;color: whitesmoke ;padding: 10px; border-radius: 3px;text-align: center;"data-id${currObj.id}>Details</button>
+  <button style="background-color: black;color: whitesmoke ;padding: 10px; border-radius: 3px;text-align: center;"data-id="${currObj.id}">Details</button>
   <button style="background-color: black;color: whitesmoke;padding: 10px; border-radius: 3px;text-align: center;">Add to Cart</button>
 
 
@@ -40,7 +46,7 @@ function createcards(source) {
     });
 
     row.innerHTML = image;
-    let detailsBtn = document.querySelectorAll(".details");
+    let detailsBtn = document.querySelectorAll(".allDetailsProductPage");
 
     detailsBtn.forEach((deBtn) => {
       deBtn.addEventListener("click", (e) => {
@@ -50,35 +56,65 @@ function createcards(source) {
       });
     });
 }
+ 
+function detailspage(source){
+  let selectedProduct = source.find(product => product.id == id)
+ 
+  let y = `
+  <div class="container"style="display: flex">
+        <div style="width:50%;">
+            <img style="width: 450px;height: 380px;"
+            src="${selectedProduct.image}" alt="img4">
+        </div>
 
-localStorage.getItem("id")
+        <div style="width: 50%;">
+          <h5 style="color: grey;">${selectedProduct.title}</h5>
+          <h4 class="display-5">Mens Cotton Jacket</h4>
+          <p style="color: grey;">4.5<i class="fa-solid fa-star"></i></p>
+          <p class="display-5">$${selectedProduct.price}</p>
+          <p style="color: gray; font-size: large;">${selectedProduct.description}</p>
+ 
+          <button type="button" class="btn btn-outline-dark">Add to Cart</button>
+           <button type="button" class="btn btn-dark">Go to Cart</button>
+        </div>
+        
+    </div>`
+
+  
+    row.innerHTML = y
+}
+
+
 
 let allbtn = document.getElementById("all");
+console.log(allbtn);
+
 
 allbtn.addEventListener("click", () => {
-  createcards(data1);
+  createcards(dataPro);
 });
 let men = document.getElementById("men");
 
 men.addEventListener("click", () => {
-  let men = data1.filter((ele) => ele.category == "men's clothing");
+  let men = dataPro.filter(ele => ele.category == "men's clothing");
   createcards(men);
 });
 let women = document.getElementById("women");
 
 women.addEventListener("click", () => {
-  let women = data1.filter((ele) => ele.category == "women's clothing");
+  let women = dataPro.filter(ele => ele.category == "women's clothing");
   createcards(women);
 });
-let jewelery = document.getElementById("jewelery");
+let jewelery = document.getElementById("Jewelery");
 
 jewelery.addEventListener("click", () => {
-  let jewelery = data1.filter((ele) => ele.category == "jewelery");
+  let jewelery = dataPro.filter(ele => ele.category == "jewelery");
   createcards(jewelery);
 });
 let Electronics = document.getElementById("Electronics");
 
 Electronics.addEventListener("click", () => {
-  let Electronics = data1.filter((ele) => ele.category == "electronics");
+  let Electronics = dataPro.filter(ele => ele.category == "electronics");
   createcards(Electronics);
 });
+

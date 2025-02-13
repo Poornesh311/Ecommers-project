@@ -28,7 +28,7 @@ function createcards(source) {
     </p><hr>
     <p style="text-align: center;">$${currObj.price}</p><hr>
 
-    <button style="background-color: black;color: whitesmoke ;padding: 10px; border-radius: 3px;text-align: center;"data-id${currObj.id}>Details</button>
+    <button style="background-color: black;color: whitesmoke ;padding: 10px; border-radius: 3px;text-align: center;"data-id="${currObj.id}" class="details">Details</button>
     <button style="background-color: black;color: whitesmoke;padding: 10px; border-radius: 3px;text-align: center;">Add to Cart</button>
 
 
@@ -43,7 +43,10 @@ function createcards(source) {
     detailsBtn.forEach((deBtn) => {
       deBtn.addEventListener("click", (e) => {
         let id = e.target.dataset.id;
+        
+        
         localStorage.setItem("id", id);
+        
         window.location.href = "./product.html";
       });
     });
@@ -80,5 +83,11 @@ Electronics.addEventListener("click", () => {
 });
 
 
+let productsEle =document.querySelector(".products")
+productsEle.addEventListener("click",()=>{
+  localStorage.setItem("id","details")
+  console.log(localStorage.getItem(id));
+  
+})
   
   
