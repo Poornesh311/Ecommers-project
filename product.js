@@ -62,12 +62,12 @@ function detailspage(source){
  
   let y = `
   <div class="container"style="display: flex">
-        <div style="width:50%;">
+        <div >
             <img style="width: 450px;height: 380px;"
             src="${selectedProduct.image}" alt="img4">
         </div>
 
-        <div style="width: 50%;">
+        <div >
           <h5 style="color: grey;">${selectedProduct.title}</h5>
           <h4 class="display-5">Mens Cotton Jacket</h4>
           <p style="color: grey;">4.5<i class="fa-solid fa-star"></i></p>
