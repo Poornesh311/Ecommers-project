@@ -1,55 +1,110 @@
-let cart = [];
-let totalAmount = 0;
 
-async function fetchProducts() {
-    try {
-        let response = await fetch("https://fakestoreapi.com/products");
-        let products = await response.json();
-        displayProducts(products);
-    } catch (error) {
-        console.error('Error fetching products:', error);
+document.addEventListener("DOMContentLoaded", function () {
+    function loadCart() {
+      const cart = getCartItems() || [];
+      cart.forEach((item) => {
+        addToCartDOM(item);
+      });
+      updateTotal();
     }
-}
-
-function displayProducts(products) {
-    const cartList = document.getElementById('cart-items');
-    cartList.innerHTML = '';
-    products.slice(0, 6).forEach(product => {
-        cartList.innerHTML += `
-            <div class="cart-item">
-                <img src="${product.image}" alt="${product.title}">
-                <div>
-                    <h6>${product.title}</h6>
-                    <p id="price-${product.id}">$${product.price.toFixed(2)}</p>
-                </div>
-                <div class="quantity-controls">
-                    <button onclick="updateQuantity('${product.id}', -1)">-</button>
-                    <span id="qty-${product.id}">1</span>
-                    <button onclick="updateQuantity('${product.id}', 1)">+</button>
-                </div>
-            </div>`;
-        cart.push({ id: product.id, name: product.title, price: product.price, quantity: 1 });
-        totalAmount += product.price;
-    });
-    updateCart();
-}
-
-function updateQuantity(id, change) {
-    const item = cart.find(i => i.id == id);
-    if (item) {
-        item.quantity += change;
-        if (item.quantity < 1) item.quantity = 1;
-        document.getElementById(`qty-${id}`).textContent = item.quantity;
-        document.getElementById(`price-${id}`).textContent = `$${(item.price * item.quantity).toFixed(2)}`;
-        updateCart();
+  
+    function addToCartDOM(item) {
+      const cartItemsList = document.getElementById("cart-items-list");
+      const cartItem = document.createElement("li");
+      cartItem.classList.add("list-group-item", "d-flex", "align-items-center");
+  
+      cartItem.innerHTML = `
+        <img src="${item.image}" class="me-3" alt="Product Image" width="50" height="50">
+        <div class="me-auto">
+          <strong>${item.title}</strong><br>
+          <span class="price">${item.price}</span> × <span class="quantity">${item.quantity}</span>
+        </div>
+        <button class="btn btn-outline-secondary btn-sm minus-btn">-</button>
+        <span class="mx-2 quantity">${item.quantity}</span> 
+        <button class="btn btn-outline-secondary btn-sm plus-btn">+</button>
+      `;
+  
+      cartItemsList.appendChild(cartItem);
+      attachEventListeners(cartItem);
     }
-}
-
-function updateCart() {
-    let total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    document.getElementById('total-amount').textContent = total.toFixed(2);
-    document.getElementById('cart-count').textContent = cart.length;
-    document.getElementById('final-total').textContent = (total + 30).toFixed(2);
-}
-
-fetchProducts();
+  
+    function attachEventListeners(item) {
+      const minusBtn = item.querySelector(".minus-btn");
+      const plusBtn = item.querySelector(".plus-btn");
+      const quantitySpan = item.querySelector(".quantity");
+  
+      minusBtn.addEventListener("click", function () {
+        let quantity = parseInt(quantitySpan.innerText);
+        if (quantity > 1) {
+          quantity -= 1;
+          quantitySpan.innerText = quantity;
+          item.querySelector(".quantity").innerText = quantity;
+        } else {
+          item.remove();
+        }
+        updateCartInLocalStorage();
+        updateTotal();
+      });
+  
+      plusBtn.addEventListener("click", function () {
+        let quantity = parseInt(quantitySpan.innerText);
+        quantity += 1;
+        quantitySpan.innerText = quantity;
+        item.querySelector(".quantity").innerText = quantity;
+        updateCartInLocalStorage();
+        updateTotal();
+      });
+    }
+  
+    function updateTotal() {
+      let total = 0;
+      let totalItems = 0;
+      let uniqueItems = 0;
+      const cartItems = document.querySelectorAll(".list-group-item");
+      const totalAmountElement = document.querySelector(".total-amount");
+      const cartCountElement = document.querySelector(".cart-count");
+  
+      cartItems.forEach((item) => {
+        const price = parseFloat(item.querySelector(".price").innerText);
+        const quantity = parseInt(item.querySelector(".quantity").innerText);
+        total += price * quantity;
+        totalItems += quantity;
+      });
+  
+      uniqueItems = cartItems.length;
+  
+      const shippingCost = 30;
+      const totalAmountWithShipping = total + shippingCost;
+  
+      totalAmountElement.innerText = `$${totalAmountWithShipping.toFixed(2)}`;
+      cartCountElement.innerHTML = `&#128722; Cart (${uniqueItems})`;
+  
+      document.querySelector(".products-total").innerText = uniqueItems;
+      document.querySelector(".shipping-cost").innerText = `$${shippingCost.toFixed(2)}`;
+      document.querySelector(".cart-count").innerText = uniqueItems;
+    }
+  
+    function getCartItems() {
+      let cartItems = localStorage.getItem("cartItems");
+      return cartItems ? JSON.parse(cartItems) : [];
+    }
+  
+    function updateCartInLocalStorage() {
+      const cartItemsList = document.getElementById("cart-items-list").children;
+      let updatedCart = [];
+    
+      for (let item of cartItemsList) {
+        const title = item.querySelector("strong").innerText;
+        const price = parseFloat(item.querySelector(".price").innerText);
+        const quantity = parseInt(item.querySelector(".quantity").innerText);
+        const image = item.querySelector("img").src;
+  
+        updatedCart.push({ title, price, quantity, image });
+      }
+  
+      localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+    }
+  
+    loadCart();
+  });
+  
