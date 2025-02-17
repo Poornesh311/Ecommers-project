@@ -29,7 +29,7 @@ function createcards(source) {
     <p style="text-align: center;">$${currObj.price}</p><hr>
 
     <button style="background-color: black;color: whitesmoke ;padding: 10px; border-radius: 3px;text-align: center;"data-id="${currObj.id}" class="details">Details</button>
-    <button style="background-color: black;color: whitesmoke;padding: 10px; border-radius: 3px;text-align: center;">Add to Cart</button>
+    <button style="background-color: black;color: whitesmoke;padding: 10px; border-radius: 3px;text-align: center;"data-id="${currObj.id}" class="addtocart">Add to Cart</button>
 
 
  </div>
@@ -48,6 +48,18 @@ function createcards(source) {
         localStorage.setItem("id", id);
         
         window.location.href = "./product.html";
+      });
+    });
+    let addtocartBtn = document.querySelectorAll(".addtocart");
+
+  addtocartBtn.forEach((adBtn) => {
+      adBtn.addEventListener("click", (e) => {
+        let id = e.target.dataset.id;
+        
+        
+        localStorage.setItem("id", id);
+        
+        window.location.href = "./cart.html";
       });
     });
 }

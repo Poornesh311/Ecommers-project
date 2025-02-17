@@ -37,7 +37,7 @@ function createcards(source) {
   <p style="text-align: center;">$${currObj.price}</p><hr>
 
   <button style="background-color: black;color: whitesmoke ;padding: 10px; border-radius: 3px;text-align: center;"data-id="${currObj.id}">Details</button>
-  <button style="background-color: black;color: whitesmoke;padding: 10px; border-radius: 3px;text-align: center;">Add to Cart</button>
+  <button style="background-color: black;color: whitesmoke;padding: 10px; border-radius: 3px;text-align: center;"data-id="${currObj.id}">Add to Cart</button>
 
 
 </div>
@@ -55,24 +55,27 @@ function createcards(source) {
         window.location.href = "./product.html";
       });
     });
+    
+    
 }
  
 function detailspage(source){
   let selectedProduct = source.find(product => product.id == id)
  
   let y = `
-  <div class="container"style="display: flex">
-        <div >
+  <div class="container-fluid"style="display: flex">
+        <div style="width: 18rem; justify-content:center; display:flex; margin:7px;text-align: center;">
+
             <img style="width: 450px;height: 380px;"
             src="${selectedProduct.image}" alt="img4">
         </div>
 
-        <div >
-          <h5 style="color: grey;">${selectedProduct.title}</h5>
-          <h4 class="display-5">Mens Cotton Jacket</h4>
-          <p style="color: grey;">4.5<i class="fa-solid fa-star"></i></p>
+        <div style="margin: 100px 300px;width: 450px; ">
+          <h5 style="color: grey;text-overflow:ellipsis;style="text-align:justify;">${selectedProduct.title}</h5>
+          <h4 class="display-5">${selectedProduct.category}</h4>
+          <p style="color: grey;">${selectedProduct.rating.rate}<i class="fa-solid fa-star"></i></p>
           <p class="display-5">$${selectedProduct.price}</p>
-          <p style="color: gray; font-size: large;">${selectedProduct.description}</p>
+          <p style="color: gray; font-size: large;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${selectedProduct.description}</p>
  
           <button type="button" class="btn btn-outline-dark">Add to Cart</button>
            <button type="button" class="btn btn-dark">Go to Cart</button>
@@ -82,6 +85,7 @@ function detailspage(source){
 
   
     row.innerHTML = y
+    
 }
 
 

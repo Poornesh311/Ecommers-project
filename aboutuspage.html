@@ -24,7 +24,7 @@
                    <a class="nav-link active text-dark " aria-current="page" href="index.html">Home</a>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link active text-dark" aria-current="page" href="product.html">Product</a>
+                     <a id = "product" class="nav-link active text-dark" aria-current="page" href="product.html">Product</a>
                    </li>
                    <li class="nav-item">
                      <a class="nav-link active text-dark" aria-current="page" href="aboutuspage.html">About</a>
@@ -37,7 +37,7 @@
          <div class="col-4 gap-5">
              <button type="button" class="btn btn-outline-dark"><a class="nav-link active" aria-current="page" href="loginpage.html"><ion-icon name="log-in-outline"></ion-icon> Login</a></button>
              <button type="button" class="btn btn-outline-dark"><a class="nav-link active" aria-current="page" href="registerpage.html"> <ion-icon name="person-add-outline"></ion-icon>Register</a></button>
-             <button type="button" class="btn btn-outline-dark"><a class="nav-link active" aria-current="page" href="add-to-cart.html"> <ion-icon name="cart-outline"></ion-icon> Cart(0)</a></button>
+             <button type="button" class="btn btn-outline-dark"><a class="nav-link active" aria-current="page" href="./cart.html"> <ion-icon name="cart-outline"></ion-icon> Cart(0)</a></button>
          </div>
         </div>
      </div>
@@ -91,6 +91,21 @@
     <footer class="text-center mt-5">
         <p>Made by <a class="text-dark" href="#">POORNESH R</a></p>
     </footer>
+
+<script>
+             let x = document.querySelector("#product")
+
+             x.addEventListener("click",()=>{
+                localStorage.setItem("id","details")
+             })
+
+
+
+
+
+    </script>
+
+
 
     <script
     src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
