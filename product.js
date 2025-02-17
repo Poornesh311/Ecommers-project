@@ -36,28 +36,37 @@ function createcards(source) {
   </p><hr>
   <p style="text-align: center;">$${currObj.price}</p><hr>
 
-  <button style="background-color: black;color: whitesmoke ;padding: 10px; border-radius: 3px;text-align: center;"data-id="${currObj.id}">Details</button>
-  <button style="background-color: black;color: whitesmoke;padding: 10px; border-radius: 3px;text-align: center;"data-id="${currObj.id}">Add to Cart</button>
-
-
+  <button class="details" style="background-color: black;color: whitesmoke; padding: 10px; border-radius: 3px; text-align: center;" data-id="${currObj.id}">Details</button>
+  <button class="add-to-cart" style="background-color: black;color: whitesmoke;padding: 10px; border-radius: 3px; text-align: center;" data-id="${currObj.id}">Add to Cart</button>
 </div>
-     `
-     image += x;
-    });
+     `;
+    image += x;
+  });
 
-    row.innerHTML = image;
-    let detailsBtn = document.querySelectorAll(".allDetailsProductPage");
+  row.innerHTML = image;
+  let detailsBtn = document.querySelectorAll(".details");
 
-    detailsBtn.forEach((deBtn) => {
-      deBtn.addEventListener("click", (e) => {
-        let id = e.target.dataset.id;
-        localStorage.setItem("id", id);
-        window.location.href = "./product.html";
-      });
+  detailsBtn.forEach((deBtn) => {
+    deBtn.addEventListener("click", (e) => {
+      let id = e.target.dataset.id;
+      localStorage.setItem("id", id);
+      window.location.href = "./product.html";
     });
-    
-    
+  });
+
+  let addtocartBtn = document.querySelectorAll(".add-to-cart");
+
+  addtocartBtn.forEach((adBtn) => {
+    adBtn.addEventListener("click", (e) => {
+      let id = e.target.dataset.id;
+      localStorage.setItem("id", id);
+      window.location.href = "./cart.html";
+    });
+  });
 }
+
+    
+
  
 function detailspage(source){
   let selectedProduct = source.find(product => product.id == id)

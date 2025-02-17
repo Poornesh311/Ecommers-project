@@ -22,7 +22,7 @@
                    <a class="nav-link active text-dark " aria-current="page" href="index.html">Home</a>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link active text-dark" aria-current="page" href="product.html">Products</a>
+                     <a id = "product" class="nav-link active text-dark" aria-current="page" href="product.html">Products</a>
                    </li>
                    <li class="nav-item">
                      <a class="nav-link active text-dark" aria-current="page" href="aboutuspage.html">About</a>
@@ -75,6 +75,18 @@
     <footer class="text-center mt-5">
       <p>Made by <a class="text-dark" href="#">POORNESH R</a></p>
   </footer>
+  <script>
+    let x = document.querySelector("#product")
+
+    x.addEventListener("click",()=>{
+       localStorage.setItem("id","details")
+    })
+
+
+
+
+
+</script>
     
 
    
