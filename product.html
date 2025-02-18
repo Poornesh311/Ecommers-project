@@ -35,7 +35,7 @@
          <div class="col-4 gap-5">
              <button type="button" class="btn btn-outline-dark"><a class="nav-link active" aria-current="page" href="loginpage.html"><ion-icon name="log-in-outline"></ion-icon> Login</a></button>
              <button type="button" class="btn btn-outline-dark"><a class="nav-link active" aria-current="page" href="registerpage.html"> <ion-icon name="person-add-outline"></ion-icon>Register</a></button>
-             <button type="button" class="btn btn-outline-dark"><a class="nav-link active" aria-current="page" href="./cart.html"> <ion-icon name="cart-outline"></ion-icon> Cart(0)</a></button>
+             <button type="button" class="btn btn-outline-dark"><a class="nav-link active" aria-current="page" href="cart.html"> <ion-icon name="cart-outline"></ion-icon> Cart(<span class="cart-count">0</span>)</a></button>
          </div>
         </div>
      </div><br>
@@ -81,6 +81,18 @@
     x.addEventListener("click",()=>{
        localStorage.setItem("id","details")
     })
+
+    
+    function updateCartCount() {
+          const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+          const cartCountElement = document.querySelector(".cart-count");
+          const uniqueItems = cartItems.length;
+          cartCountElement.innerText = `${uniqueItems}`;
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+          updateCartCount();
+        });
 
 
 
